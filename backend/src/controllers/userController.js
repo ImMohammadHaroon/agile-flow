@@ -162,6 +162,14 @@ export const updateUser = async (req, res) => {
 export const deleteUser = async (req, res) => {
   try {
     const { id } = req.params;
+    const currentUserId = req.user?.id;
+
+    // Prevent users from deleting themselves
+    if (id === currentUserId) {
+      return res.status(403).json({ 
+        error: 'You cannot delete your own account. Please contact another HOD or administrator.' 
+      });
+    }
 
     // Delete auth user (cascade will delete profile)
     const { error: authError } = await supabaseAdmin.auth.admin.deleteUser(id);

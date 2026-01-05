@@ -27,7 +27,7 @@ export default function Users() {
 
   useEffect(() => {
     fetchUsers();
-    
+
     // Subscribe to user updates
     const channel = supabase
       .channel('users_updates')
@@ -41,7 +41,7 @@ export default function Users() {
         (payload) => {
           console.log('User update received:', payload);
           // Update the user in the list when online_status changes
-          setUsers(prev => prev.map(user => 
+          setUsers(prev => prev.map(user =>
             user.id === payload.new.id ? { ...user, ...payload.new } : user
           ));
         }
@@ -255,11 +255,10 @@ export default function Users() {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <span
-                          className={`badge ${
-                            user.online_status
+                          className={`badge ${user.online_status
                               ? 'bg-green-100 text-green-800'
                               : 'bg-gray-100 text-gray-800'
-                          }`}
+                            }`}
                         >
                           {user.online_status ? 'Online' : 'Offline'}
                         </span>
@@ -276,13 +275,19 @@ export default function Users() {
                         )}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        {profile?.role === 'HOD' && (
+                        {profile?.role === 'HOD' && user.id !== profile.id && (
                           <button
                             onClick={() => handleDeleteUser(user.id)}
                             className="text-red-600 hover:text-red-900"
+                            title="Delete user"
                           >
                             <Trash2 className="w-5 h-5" />
                           </button>
+                        )}
+                        {user.id === profile?.id && (
+                          <span className="text-xs text-gray-400 italic">
+                            You
+                          </span>
                         )}
                       </td>
                     </tr>
