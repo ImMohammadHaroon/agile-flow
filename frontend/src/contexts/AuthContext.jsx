@@ -21,7 +21,16 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     // Get initial session
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    supabase.auth.getSession().then(({ data: { session }, error }) => {
+      if (error) {
+        console.error('Session error:', error);
+        // Clear invalid tokens
+        localStorage.removeItem('supabase_token');
+        supabase.auth.signOut();
+        setLoading(false);
+        return;
+      }
+      
       setSession(session);
       if (session) {
         localStorage.setItem('supabase_token', session.access_token);
@@ -29,6 +38,10 @@ export const AuthProvider = ({ children }) => {
       } else {
         setLoading(false);
       }
+    }).catch((err) => {
+      console.error('Failed to get session:', err);
+      localStorage.removeItem('supabase_token');
+      setLoading(false);
     });
 
     // Listen for auth changes
