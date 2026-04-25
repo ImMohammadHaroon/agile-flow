@@ -1,0 +1,69 @@
+# ========================
+# Environment Variables
+# ========================
+.env
+.env.local
+.env.development
+.env.production
+.env.staging
+.env.*.local
+
+# ========================
+# Dependencies
+# ========================
+node_modules/
+backend/node_modules/
+frontend/node_modules/
+
+# ========================
+# Build Output
+# ========================
+dist/
+build/
+frontend/dist/
+frontend/build/
+
+# ========================
+# Logs
+# ========================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ========================
+# OS & Editor
+# ========================
+.DS_Store
+Thumbs.db
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.swp
+*.swo
+
+# ========================
+# Cache & Temp
+# ========================
+.cache/
+.parcel-cache/
+.vite/
+.eslintcache
+*.tsbuildinfo
+
+# ========================
+# Sensitive / Credentials
+# ========================
+login.txt
+*.pem
+*.key
+*.cert
+secrets/
