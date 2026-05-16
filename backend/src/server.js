@@ -9,6 +9,7 @@ import authRoutes from './routes/authRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import taskRoutes from './routes/taskRoutes.js';
 import messageRoutes from './routes/messageRoutes.js';
+import keepAliveRoute from './routes/keepAliveRoute.js';
 
 dotenv.config();
 
@@ -76,6 +77,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/tasks', taskRoutes);
 app.use('/api/messages', messageRoutes);
+app.use('/api/keep-alive', keepAliveRoute);
 
 // 404 handler
 app.use((req, res) => {
